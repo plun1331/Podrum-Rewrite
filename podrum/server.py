@@ -34,6 +34,7 @@ from constant.vanilla_commands import vanilla_commands
 from constant.misc import misc
 from handler.command_handler import command_handler
 from utils.logger import logger
+import time
 
 class server:
     def __init__(self):
@@ -50,7 +51,7 @@ class server:
         print(misc.logo)
         self.register_vanilla_commands()
         self.command_handler.start_handler()
-        finnish_time = time,time()
+        finnish_time = time.time()
         startup_time = "%.3f" % (finnish_time - start_time)
         logger.success(f"Done in {startup_time} seconds.")
         
