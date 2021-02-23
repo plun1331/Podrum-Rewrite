@@ -31,20 +31,29 @@
 
 from manager.command_manager import command_manager
 from constant.vanilla_commands import vanilla_commands
+from constant.misc import misc
 from handler.command_handler import command_handler
 from utils.logger import logger
 
 class server:
     def __init__(self):
         self.command_manager = command_manager(self)
-        self.register_vanilla_commands()
         self.command_handler = command_handler(self)
-        self.command_handler.start_handler()
+        self.start()
 
     def register_vanilla_commands(self):
         self.command_manager.register(vanilla_commands.say, "Say Command")
         self.command_manager.register(vanilla_commands.stop, "Stop Command")
 
+    def start(self):
+        start_time = time.time()
+        print(misc.logo)
+        self.register_vanilla_commands()
+        self.command_handler.start_handler()
+        finnish_time = time,time()
+        startup_time = "%.3f" % (finnish_time - start_time)
+        logger.success(f"Done in {startup_time} seconds.")
+        
     def stop(self):
         self.command_handler.stop_handler()
 
