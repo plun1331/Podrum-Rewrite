@@ -47,4 +47,4 @@ class vanilla_commands:
         sender.sendMessage("--- Showing help ---")
         for name, info in server.command_manager.commands:
             if name != "help":
-                sender.sendMessage(f"/{name}: {info["description"]}")
+                sender.send_message(f"/{name}: {info['description']}")
