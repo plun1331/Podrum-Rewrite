@@ -34,5 +34,5 @@ class version:
     podrum_api_version = "0.0.1"
     podrum_codename = "Lime"
     podrum_license = "MIT"
-    minecraft_version = "1.16.201"
-    minecraft_protocol = 422
+    mcbe_version = "1.16.201"
+    mcbe_protocol = 422
