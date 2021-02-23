@@ -44,7 +44,7 @@ class vanilla_commands:
         sender.send_message("Server stopped.")
         
     def help(args, sender, server):
-        sender.sendMessage("--- Showing help ---")
-        for name, info in server.command_manager.commands:
+        sender.send_message("--- Showing help ---")
+        for name, info in dict(server.command_manager.commands).items():
             if name != "help":
                 sender.send_message(f"/{name}: {info['description']}")
