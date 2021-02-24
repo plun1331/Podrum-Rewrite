@@ -32,11 +32,11 @@
 class command_manager:
     def __init__(self, server):
         self.server = server
-        self.commands = {}
+        self.commands: dict = {}
 
-    def register(self, command, description):
-        self.commands[command.__name__] = {"description": description, "command": command}
+    def register(self, command, description: str) -> None:
+        self.commands[command.__name__]: dict = {"description": description, "command": command}
 
-    def execute(self, command_name, command_args, sender):
+    def execute(self, command_name: str, command_args: list, sender) -> None:
         if command_name in self.commands:
             self.commands[command_name]["command"](command_args, sender, self.server)
