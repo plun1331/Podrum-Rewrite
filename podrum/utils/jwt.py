@@ -36,14 +36,14 @@ import json
 
 class jtw:
     @staticmethod
-    def decode(token):
+    def decode(token: str) -> dict:
         header, payload, verifySigniture = token.split(".")
         payload += "=="
         json_data = base64.b64decode(payload.replace("-_", "+/")).decode()
         return json.loads(json_data)
   
     @staticmethod
-    def encode(header, payload, verifySigniture):
+    def encode(header: dict, payload: dict, verifySigniture: str) -> str:
         body = []
         body.insert(0, base64.b64encode(json.dumps(header).encode()).decode())
         body.insert(1, base64.b64encode(json.dumps(payload).encode()).decode())
