@@ -16,4 +16,4 @@ class async_core:
     async def aprint(text):
         loop = asyncio.get_event_loop()
         task = loop.create_task(sys.stdout.writelines(f"{text}\n"))
-        await task
+        return await task
