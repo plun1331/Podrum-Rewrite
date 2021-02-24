@@ -45,10 +45,12 @@ class vanilla_commands:
         server.stop()
         sender.send_message("Server stopped.")
         
+    @staticmethod
     def help(args: list, sender, server) -> None:
         sender.send_message("--- Showing help ---")
         for name, info in dict(server.command_manager.commands).items():
             sender.send_message(f"/{name}: {info['description']}")
-                                                      
+          
+    @staticmethod
     def version(args: list, sender, server) -> None:
         sender.send_message(f"This server is running Podrum version {version.podrum_version} {version.podrum_codename} on API {version.podrum_api_version} for mcbe {version.mcbe_version} ({version.mcbe_protocol}). This version is licensed under the {version.podrum_license} license.")
