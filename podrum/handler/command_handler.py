@@ -33,7 +33,7 @@ from threading import Thread
 from utils.logger import logger
 
 class command_handler(Thread):
-    def __init__(self, server):
+    def __init__(self, server) -> None:
         super().__init__()
         self.server = server
         self.stopped = False
