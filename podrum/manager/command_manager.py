@@ -30,7 +30,7 @@
 ################################################################################
 
 class command_manager:
-    def __init__(self, server):
+    def __init__(self, server) -> None:
         self.server = server
         self.commands: dict = {}
 
