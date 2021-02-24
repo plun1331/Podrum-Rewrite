@@ -30,6 +30,7 @@
 ################################################################################
 
 from constant.version import version
+import os
 
 class vanilla_commands:
     @staticmethod
@@ -44,6 +45,7 @@ class vanilla_commands:
         sender.send_message("Stopping server...")
         server.stop()
         sender.send_message("Server stopped.")
+        os.kill(os.getpid(), 15)
         
     @staticmethod
     def help(args: list, sender, server) -> None:
