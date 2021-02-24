@@ -63,6 +63,5 @@ class server:
         self.command_handler.stop_handler()
         os.kill(os.getpid(), 15)
 
-    @staticmethod
-    def send_message(message: str) -> None:
+    def send_message(self, message: str) -> None:
         logger.info(message)
