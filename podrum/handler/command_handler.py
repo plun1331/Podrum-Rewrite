@@ -38,7 +38,7 @@ class command_handler(Thread):
         self.server = server
         self.stopped = False
 
-    def handle_command(self, user_input):
+    def handle_command(self, user_input: str) -> None:
         if len(user_input) > 0:
             raw_command = user_input.split()
             command_name = raw_command[0]
@@ -49,13 +49,13 @@ class command_handler(Thread):
             else:
                 logger.error("Invalid command!")
 
-    def start_handler(self):
+    def start_handler(self) -> None:
         self.stopped = False
         self.start()
 
-    def stop_handler(self):
+    def stop_handler(self) -> None:
         self.stopped = True
 
-    def run(self):
+    def run(self) -> None:
         while not self.stopped:
             self.handle_command(input())
