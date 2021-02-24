@@ -6,8 +6,8 @@ class async_core:
     async def ainput(text):
         loop = asyncio.get_event_loop()
         future = loop.create_future()
+        sys.stdout.writelines(text)
         def run():
-            sys.stdout.writelines(text)
             line = sys.stdin.readline()
             loop.call_soon_threadsafe(future.set_result, line)
         Thread(target = run, daemon = True).start()
