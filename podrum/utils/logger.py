@@ -32,6 +32,7 @@
 from constant.text_format import text_format
 from datetime import datetime
 import inspect
+import sys
 
 class logger:
     @staticmethod
@@ -94,3 +95,10 @@ class logger:
     @staticmethod
     def debug(content):
         logger.log(inspect.stack()[0][3], content)
+          
+    @staticmethod
+    def enable_windows_formatting():
+        if sys.platform == "win32" or sys.platform == "win64":
+            from ctypes import windll
+            kernel = windll.kernel32
+            kernel.SetConsoleMode(kernel.GetStdHandle(-11), 7)
