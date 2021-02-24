@@ -50,6 +50,7 @@ class server:
         self.command_manager.register(vanilla_commands.version, "Version Command")
 
     def start(self):
+        logger.enable_windows_formatting()
         start_time = time.time()
         print(misc.logo)
         self.register_vanilla_commands()
