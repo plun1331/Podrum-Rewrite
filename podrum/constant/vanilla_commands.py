@@ -29,6 +29,8 @@
 #                                                                              #
 ################################################################################
 
+from constant.version import version
+
 class vanilla_commands:
     @staticmethod
     def say(args, sender, server):
@@ -47,3 +49,6 @@ class vanilla_commands:
         sender.send_message("--- Showing help ---")
         for name, info in dict(server.command_manager.commands).items():
             sender.send_message(f"/{name}: {info['description']}")
+                                                      
+    def version(args, sender, server):
+        sender.send_message(f"This server is running Podrum version {version.podrum_version} {version.podrum_codename} on API {version.podrum_api_version} for mcbe {version.mcbe_version} ({version.mcbe_protocol}). This version is licensed under the {version.podrum_license} license.")
