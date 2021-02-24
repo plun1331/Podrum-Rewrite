@@ -35,6 +35,7 @@ from constant.misc import misc
 from handler.command_handler import command_handler
 from utils.logger import logger
 import time
+import os
 
 class server:
     def __init__(self):
@@ -59,6 +60,7 @@ class server:
         
     def stop(self):
         self.command_handler.stop_handler()
+        os.kill(os.getpid(), 15)
 
     @staticmethod
     def send_message(message):
