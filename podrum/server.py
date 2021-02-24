@@ -43,13 +43,13 @@ class server:
         self.command_handler = command_handler(self)
         self.start()
 
-    def register_vanilla_commands(self):
+    def register_vanilla_commands(self) -> None:
         self.command_manager.register(vanilla_commands.say, "Say Command")
         self.command_manager.register(vanilla_commands.stop, "Stop Command")
         self.command_manager.register(vanilla_commands.help, "Help Command")
         self.command_manager.register(vanilla_commands.version, "Version Command")
 
-    def start(self):
+    def start(self) -> None:
         logger.enable_windows_formatting()
         start_time = time.time()
         print(misc.logo)
@@ -59,10 +59,10 @@ class server:
         startup_time = "%.3f" % (finnish_time - start_time)
         logger.success(f"Done in {startup_time}. Type help to view all available commands.")
         
-    def stop(self):
+    def stop(self) -> None:
         self.command_handler.stop_handler()
         os.kill(os.getpid(), 15)
 
     @staticmethod
-    def send_message(message):
+    def send_message(message: str) -> None:
         logger.info(message)
