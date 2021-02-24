@@ -46,6 +46,7 @@ class server:
         self.command_manager.register(vanilla_commands.say, "Say Command")
         self.command_manager.register(vanilla_commands.stop, "Stop Command")
         self.command_manager.register(vanilla_commands.help, "Help Command")
+        self.command_manager.register(vanilla_commands.version, "Version Command")
 
     def start(self):
         start_time = time.time()
