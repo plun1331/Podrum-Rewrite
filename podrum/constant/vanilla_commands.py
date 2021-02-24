@@ -33,22 +33,22 @@ from constant.version import version
 
 class vanilla_commands:
     @staticmethod
-    def say(args, sender, server):
+    def say(args: list, sender, server) -> None:
         if len(args) > 0:
             sender.send_message(" ".join(args))
         else:
             sender.send_message("say <message>")
 
     @staticmethod
-    def stop(args, sender, server):
+    def stop(args: list, sender, server) -> None:
         sender.send_message("Stopping server...")
         server.stop()
         sender.send_message("Server stopped.")
         
-    def help(args, sender, server):
+    def help(args: list, sender, server) -> None:
         sender.send_message("--- Showing help ---")
         for name, info in dict(server.command_manager.commands).items():
             sender.send_message(f"/{name}: {info['description']}")
                                                       
-    def version(args, sender, server):
+    def version(args: list, sender, server) -> None:
         sender.send_message(f"This server is running Podrum version {version.podrum_version} {version.podrum_codename} on API {version.podrum_api_version} for mcbe {version.mcbe_version} ({version.mcbe_protocol}). This version is licensed under the {version.podrum_license} license.")
