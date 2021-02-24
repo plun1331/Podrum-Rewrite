@@ -38,7 +38,7 @@ import time
 from utils.logger import logger
 
 class server:
-    def __init__(self):
+    def __init__(self) -> None:
         self.command_manager = command_manager(self)
         self.command_handler = command_handler(self)
         self.start()
