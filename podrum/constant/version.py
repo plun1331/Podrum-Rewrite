@@ -30,9 +30,9 @@
 ################################################################################
 
 class version:
-    podrum_version = "0.0.5"
-    podrum_api_version = "0.0.1"
-    podrum_codename = "Lime"
-    podrum_license = "MIT"
-    mcbe_version = "1.16.201"
-    mcbe_protocol = 422
+    podrum_version: str = "0.0.5"
+    podrum_api_version: str = "0.0.1"
+    podrum_codename: str = "Lime"
+    podrum_license: str = "MIT"
+    mcbe_version: str = "1.16.201"
+    mcbe_protocol: int = 422
