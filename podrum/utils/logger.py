@@ -36,68 +36,68 @@ import sys
 
 class logger:
     @staticmethod
-    def log(log_type, content):
+    def log(log_type: str, content: str) -> None:
         date_time = datetime.now()
         if log_type.lower() == "info":
-            color = text_format.blue
+            color: str = text_format.blue
         elif log_type.lower() == "warn":
-            color = text_format.yellow
+            color: str = text_format.yellow
         elif log_type.lower() == "error":
-            color = text_format.red
+            color: str = text_format.red
         elif log_type.lower() == "success":
-            color = text_format.green
+            color: str = text_format.green
         elif log_type.lower() == "emergency":
-            color = text_format.gold
+            color: str = text_format.gold
         elif log_type.lower() == "alert":
-            color = text_format.purple
+            color: str = text_format.purple
         elif log_type.lower() == "notice":
-            color = text_format.aqua
+            color: str = text_format.aqua
         elif log_type.lower() == "critical":
-            color = text_format.darkRed
+            color: str = text_format.darkRed
         elif log_type.lower() == "debug":
-            color = text_format.gray
+            color: str = text_format.gray
         else:
             return
         print(f"{color}[{log_type.upper()}: {date_time.strftime('%H:%M')}]{text_format.white} {content}")
 
     @staticmethod
-    def info(content):
+    def info(content: str) -> None:
         logger.log(inspect.stack()[0][3], content)
 
     @staticmethod
-    def warn(content):
+    def warn(content: str) -> None:
         logger.log(inspect.stack()[0][3], content)
 
     @staticmethod
-    def error(content):
+    def error(content: str) -> None:
         logger.log(inspect.stack()[0][3], content)
 
     @staticmethod
-    def success(content):
+    def success(content: str) -> None:
         logger.log(inspect.stack()[0][3], content)
 
     @staticmethod
-    def emergency(content):
+    def emergency(content: str) -> None:
         logger.log(inspect.stack()[0][3], content)
 
     @staticmethod
-    def alert(content):
+    def alert(content: str) -> None:
         logger.log(inspect.stack()[0][3], content)
 
     @staticmethod
-    def notice(content):
+    def notice(content: str) -> None:
         logger.log(inspect.stack()[0][3], content)
 
     @staticmethod
-    def critical(content):
+    def critical(content: str) -> None:
         logger.log(inspect.stack()[0][3], content)
 
     @staticmethod
-    def debug(content):
+    def debug(content: str) -> None:
         logger.log(inspect.stack()[0][3], content)
           
     @staticmethod
-    def enable_windows_formatting():
+    def enable_windows_formatting() -> None:
         if sys.platform == "win32" or sys.platform == "win64":
             from ctypes import windll
             kernel = windll.kernel32
