@@ -30,10 +30,15 @@
 ################################################################################
 
 import asyncio
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor as thread_pool_executor
 
 class async_core:
     @staticmethod
     async def ainput(prompt: str = "") -> str:
-        with ThreadPoolExecutor(1, "AsyncInput") as executor:
+        with thread_pool_executor(1, "AsyncInput") as executor:
             return await asyncio.get_event_loop().run_in_executor(executor, input, prompt)
+        
+    @staticmethod
+    async def aprint(text: str) -> None:
+        with thread_pool_executor(1, "AsyncOutput") as executor:
+            await asyncio.get_event_loop().run_in_executor(executor, print, text)
