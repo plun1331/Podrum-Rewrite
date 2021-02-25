@@ -59,6 +59,6 @@ class vanilla_commands:
 
     @staticmethod
     def reload(args: list, sender, server) -> None:
-        self.send_message("Reloading...")
+        sender.send_message("Reloading...")
         server.plugin_manager.reload_all()
-        self.send_message("Successfully reloaded.")
+        sender.send_message("Successfully reloaded.")
