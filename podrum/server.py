@@ -40,6 +40,7 @@ class server:
     def __init__(self) -> None:
         self.command_manager = command_manager(self)
         self.command_handler = command_handler(self)
+        self.plugin_manager = plugin_manager(self)
         self.start()
 
     def register_vanilla_commands(self) -> None:
