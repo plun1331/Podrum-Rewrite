@@ -33,6 +33,7 @@ from constant.misc import misc
 from constant.vanilla_commands import vanilla_commands
 from handler.command_handler import command_handler
 from manager.command_manager import command_manager
+from manager.plugin_command import plugin_command
 import time
 from utils.logger import logger
 
@@ -53,6 +54,7 @@ class server:
         logger.enable_windows_formatting()
         start_time = time.time()
         print(misc.logo)
+        self.plugin_manager.load_all()
         self.register_vanilla_commands()
         self.command_handler.start_handler()
         finnish_time = time.time()
