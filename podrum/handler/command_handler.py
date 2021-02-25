@@ -30,7 +30,6 @@
 ################################################################################
 
 from threading import Thread
-from utils.logger import logger
 
 class command_handler(Thread):
     def __init__(self, server) -> None:
@@ -47,7 +46,7 @@ class command_handler(Thread):
             if command_name in commands:
                 self.server.command_manager.execute(command_name, command_args, self.server)
             else:
-                logger.error("Invalid command!")
+                self.server.logger.error("Invalid command!")
 
     def start_handler(self) -> None:
         self.stopped = False
