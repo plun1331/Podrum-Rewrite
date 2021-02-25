@@ -42,7 +42,7 @@ class plugin_manager:
         self.plugins: dict = {}
         self.plugin_count = 0
         
-    def load(self, path):
+    def load_plugin(self, path):
         plugin_file = ZipFile(path, "r")
         plugin_info = json.loads(plugin_file.read("info.json"))
         if plugin_info["name"] in self.plugins:
@@ -57,5 +57,9 @@ class plugin_manager:
         self.plugins[plugin_info["name"]].server = self.server
         self.plugins[plugin_info["name"]].version = info["version"] if "version" in plugin_info else ""
         self.plugins[plugin_info["name"]].description = info["description"] if "description" in plugin_info else ""
-        self.plugins[plugin_info["name"]].onStartup()
+        self.plugins[plugin_info["name"]].on_load()
         
+    def unload_plugin(self, name):
+        if name in self.plugins:
+            self.plugins[name].on_unload()
+            del self.plugins[name]
