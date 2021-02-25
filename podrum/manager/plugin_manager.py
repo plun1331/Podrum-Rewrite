@@ -48,10 +48,10 @@ class plugin_manager:
         plugin_info = json.loads(plugin_file.read("info.json"))
         if plugin_info["name"] in self.plugins:
             return
-        if plugin_info["api"] != version.podrum_api:
+        if plugin_info["api_version"] != version.podrum_api_version:
             return
         sys.path.append(path)
-        main = pluginInfo["main"].rsplit(".", 1)
+        main = plugin_info["main"].rsplit(".", 1)
         module = importlib.import_module(main[0])
         main_class = getattr(module, main[1])
         self.plugins[plugin_info["name"]] = main_class()
