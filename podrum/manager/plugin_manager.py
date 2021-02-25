@@ -52,7 +52,7 @@ class plugin_manager:
             return
         sys.path.append(path)
         main = plugin_info["main"].rsplit(".", 1)
-        module = importlib.import_module(main[0])
+        module = importlib.import_module("plugins." + main[0])
         main_class = getattr(module, main[1])
         self.plugins[plugin_info["name"]] = main_class()
         self.plugins[plugin_info["name"]].server = self.server
