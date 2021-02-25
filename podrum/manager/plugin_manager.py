@@ -60,7 +60,7 @@ class plugin_manager:
         self.plugins[plugin_info["name"]].on_load()
         self.plugin_count += 1
         
-    def load_all(self, path) -> None:
+    def load_all(self, path: str) -> None:
         for top, dirs, files in os.walk(path):
             for file_name in files:
                 full_path = os.path.abspath(os.path.join(top, file_name))
