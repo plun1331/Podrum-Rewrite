@@ -83,5 +83,5 @@ class plugin_manager:
             self.server.logger.info(f"Unloaded {name}.")
             
     def unload_all(self) -> None:
-        for name in self.plugins:
+        for name in dict(self.plugins):
             self.unload(name)
