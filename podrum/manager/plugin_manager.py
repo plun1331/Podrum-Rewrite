@@ -56,8 +56,9 @@ class plugin_manager:
         main_class = getattr(module, main[1])
         self.plugins[plugin_info["name"]] = main_class()
         self.plugins[plugin_info["name"]].server = self.server
-        self.plugins[plugin_info["name"]].version = info["version"] if "version" in plugin_info else ""
-        self.plugins[plugin_info["name"]].description = info["description"] if "description" in plugin_info else ""
+        self.plugins[plugin_info["name"]].version = plugin_info["version"] if "version" in plugin_info else ""
+        self.plugins[plugin_info["name"]].description = plugin_info["description"] if "description" in plugin_info else ""
+        self.plugins[plugin_info["name"]].author = plugin_info["author"] if "author" in plugin_info else ""
         if core_utils.has_attribute(main_class, "on_load"):
             self.plugins[plugin_info["name"]].on_load()
         self.plugin_count += 1
