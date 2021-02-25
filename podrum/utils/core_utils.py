@@ -31,7 +31,7 @@
 
 class core_utils:
     @staticmethod
-    def has_attribute(item, attribute):
+    def has_attribute(item, attribute: str) -> bool:
         try:
             getattr(item, attribute)
             return True
