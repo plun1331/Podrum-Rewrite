@@ -85,3 +85,7 @@ class plugin_manager:
     def unload_all(self) -> None:
         for name in dict(self.plugins):
             self.unload(name)
+                                   
+    def reload_all(self) -> None:
+        self.unload_all()
+        self.load_all()
