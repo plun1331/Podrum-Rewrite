@@ -62,3 +62,7 @@ class vanilla_commands:
         sender.send_message("Reloading...")
         server.plugin_manager.reload_all()
         sender.send_message("Successfully reloaded.")
+                                
+    @staticmethod
+    def plugins(args: list, sender, server) -> None:
+        sender.send_message(f"Plugins({server.plugin_manager.plugin_count}): {', '.join(server.plugin_manager.plugins)}")
