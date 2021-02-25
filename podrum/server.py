@@ -41,6 +41,7 @@ class server:
     def __init__(self) -> None:
         self.command_manager = command_manager(self)
         self.command_handler = command_handler(self)
+        self.logger = logger()
         self.plugin_manager = plugin_manager(self)
         self.start()
 
@@ -51,7 +52,6 @@ class server:
         self.command_manager.register(vanilla_commands.version, "Version Command")
 
     def start(self) -> None:
-        logger.enable_windows_formatting()
         start_time = time.time()
         print(misc.logo)
         self.plugin_manager.load_all(misc.plugin_dir)
@@ -59,10 +59,10 @@ class server:
         self.command_handler.start_handler()
         finnish_time = time.time()
         startup_time = "%.3f" % (finnish_time - start_time)
-        logger.success(f"Done in {startup_time}. Type help to view all available commands.")
+        self.logger.success(f"Done in {startup_time}. Type help to view all available commands.")
         
     def stop(self) -> None:
         self.command_handler.stop_handler()
 
     def send_message(self, message: str) -> None:
-        logger.info(message)
+        self.logger.info(message)
