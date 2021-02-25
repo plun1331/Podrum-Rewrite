@@ -68,12 +68,6 @@ class server:
     def stop(self) -> None:
         self.command_handler.stop_handler()
         self.plugin_manager.unload_all()
-        
-    def reload(self) -> None:
-        self.command_handler.stop_handler()
-        self.plugin_manager.unload_all()
-        self.plugin_manager.load_all()
-        self.command_handler.start_handler()
 
     def send_message(self, message: str) -> None:
         self.logger.info(message)
