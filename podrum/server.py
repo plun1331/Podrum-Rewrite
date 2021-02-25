@@ -54,7 +54,7 @@ class server:
         logger.enable_windows_formatting()
         start_time = time.time()
         print(misc.logo)
-        self.plugin_manager.load_all()
+        self.plugin_manager.load_all(misc.plugin_dir)
         self.register_vanilla_commands()
         self.command_handler.start_handler()
         finnish_time = time.time()
