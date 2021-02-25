@@ -64,7 +64,7 @@ class plugin_manager:
     def load_all(self) -> None:
         for top, dirs, files in os.walk(self.path):
             for file_name in files:
-                full_path = os.path.join(top, file_name)
+                full_path = os.path.abspath(os.path.join(top, file_name))
                 if full_path.endswith(".pyz"):
                     self.load(full_path)
         
