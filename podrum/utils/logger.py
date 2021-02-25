@@ -35,8 +35,13 @@ import inspect
 import sys
 
 class logger:
-    @staticmethod
-    def log(log_type: str, content: str) -> None:
+    def __init__(self):
+        if sys.platform == "win32" or sys.platform == "win64":
+            from ctypes import windll
+            kernel = windll.kernel32
+            kernel.SetConsoleMode(kernel.GetStdHandle(-11), 7)
+        
+    def log(self, log_type: str, content: str) -> None:
         date_time = datetime.now()
         if log_type.lower() == "info":
             color: str = text_format.blue
@@ -60,45 +65,29 @@ class logger:
             return
         print(f"{color}[{log_type.upper()}: {date_time.strftime('%H:%M')}]{text_format.white} {content}")
 
-    @staticmethod
-    def info(content: str) -> None:
-        logger.log(inspect.stack()[0][3], content)
+    def info(self, content: str) -> None:
+        self.log(inspect.stack()[0][3], content)
 
-    @staticmethod
-    def warn(content: str) -> None:
-        logger.log(inspect.stack()[0][3], content)
+    def warn(self, content: str) -> None:
+        self.log(inspect.stack()[0][3], content)
 
-    @staticmethod
-    def error(content: str) -> None:
-        logger.log(inspect.stack()[0][3], content)
+    def error(self, content: str) -> None:
+        self.log(inspect.stack()[0][3], content)
 
-    @staticmethod
-    def success(content: str) -> None:
-        logger.log(inspect.stack()[0][3], content)
+    def success(self, content: str) -> None:
+        self.log(inspect.stack()[0][3], content)
 
-    @staticmethod
-    def emergency(content: str) -> None:
-        logger.log(inspect.stack()[0][3], content)
+    def emergency(self, content: str) -> None:
+        self.log(inspect.stack()[0][3], content)
 
-    @staticmethod
-    def alert(content: str) -> None:
-        logger.log(inspect.stack()[0][3], content)
+    def alert(self, content: str) -> None:
+        self.log(inspect.stack()[0][3], content)
 
-    @staticmethod
-    def notice(content: str) -> None:
-        logger.log(inspect.stack()[0][3], content)
+    def notice(self, content: str) -> None:
+        self.log(inspect.stack()[0][3], content)
+              
+    def critical(self, content: str) -> None:
+        self.log(inspect.stack()[0][3], content)
 
-    @staticmethod
-    def critical(content: str) -> None:
-        logger.log(inspect.stack()[0][3], content)
-
-    @staticmethod
-    def debug(content: str) -> None:
-        logger.log(inspect.stack()[0][3], content)
-          
-    @staticmethod
-    def enable_windows_formatting() -> None:
-        if sys.platform == "win32" or sys.platform == "win64":
-            from ctypes import windll
-            kernel = windll.kernel32
-            kernel.SetConsoleMode(kernel.GetStdHandle(-11), 7)
+    def debug(self, content: str) -> None:
+        self.log(inspect.stack()[0][3], content)
