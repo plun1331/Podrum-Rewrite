@@ -37,11 +37,10 @@ import sys
 from zipfile import ZipFile
 
 class plugin_manager:
-    def __init__(self, server, path: str) -> None:
+    def __init__(self, server) -> None:
         self.server = server
         self.plugins: dict = {}
         self.plugin_count = 0
-        self.path = path
         
     def load(self, path: str) -> None:
         plugin_file = ZipFile(path, "r")
@@ -61,8 +60,8 @@ class plugin_manager:
         self.plugins[plugin_info["name"]].on_load()
         self.plugin_count += 1
         
-    def load_all(self) -> None:
-        for top, dirs, files in os.walk(self.path):
+    def load_all(self, path) -> None:
+        for top, dirs, files in os.walk(path):
             for file_name in files:
                 full_path = os.path.abspath(os.path.join(top, file_name))
                 if full_path.endswith(".pyz") or full_path.endswith(".zip"):
