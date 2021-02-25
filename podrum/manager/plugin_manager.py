@@ -61,11 +61,12 @@ class plugin_manager:
         self.plugins[plugin_info["name"]].on_load()
         self.plugin_count += 1
         
-    def load_all() -> None:
-        for file_name in os.listdir(self.path):
-            if os.path.isfile(path):
-                if path.endswith(".pyz"):
-                    self.load(path)
+    def load_all(self) -> None:
+        for top, dirs, files in os.walk(self.path):
+            for file_name in files:
+                full_path = os.path.join(top, file_name)
+                if full_path.endswith(".pyz"):
+                    self.load(full_path)
         
     def unload(self, name: str) -> None:
         if name in self.plugins:
