@@ -59,6 +59,7 @@ class plugin_manager:
         main_class = getattr(module, main[1])
         self.plugins[plugin_info["name"]] = main_class()
         self.plugins[plugin_info["name"]].server = self.server
+        self.plugins[plugin_info["name"]].path = path
         self.plugins[plugin_info["name"]].version = plugin_info["version"] if "version" in plugin_info else ""
         self.plugins[plugin_info["name"]].description = plugin_info["description"] if "description" in plugin_info else ""
         self.plugins[plugin_info["name"]].author = plugin_info["author"] if "author" in plugin_info else ""
@@ -85,3 +86,13 @@ class plugin_manager:
     def unload_all(self) -> None:
         for name in dict(self.plugins):
             self.unload(name)
+                                   
+    def reload(self, name: str) -> None:
+        if name in self.plugins:
+            path = self.plugins[name].path
+            self.unload(name)
+            self.load(path)
+                                   
+    def reload_all(self) -> None:
+        for name in dict(self.plugins):
+            self.reload(name)
