@@ -50,6 +50,10 @@ class server:
         self.command_manager.register(vanilla_commands.stop, "Stop Command")
         self.command_manager.register(vanilla_commands.help, "Help Command")
         self.command_manager.register(vanilla_commands.version, "Version Command")
+        
+    def get_plugin_main(self, name):
+        if name in self.plugin_manager.plugins:
+            return self.plugin_manager.plugins[name]
 
     def start(self) -> None:
         start_time = time.time()
