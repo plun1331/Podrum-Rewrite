@@ -58,8 +58,10 @@ class plugin_manager:
         self.plugins[plugin_info["name"]].version = info["version"] if "version" in plugin_info else ""
         self.plugins[plugin_info["name"]].description = info["description"] if "description" in plugin_info else ""
         self.plugins[plugin_info["name"]].on_load()
+        self.plugin_count += 1
         
     def unload_plugin(self, name):
         if name in self.plugins:
             self.plugins[name].on_unload()
             del self.plugins[name]
+            self.plugin_count -= 1
