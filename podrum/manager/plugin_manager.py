@@ -47,8 +47,10 @@ class plugin_manager:
         plugin_file = ZipFile(path, "r")
         plugin_info = json.loads(plugin_file.read("info.json"))
         if plugin_info["name"] in self.plugins:
+            self.server.logger.alert(f"A plugin with the name {plugin_info['name']} already exists.")
             return
         if plugin_info["api_version"] != version.podrum_api_version:
+            self.server.logger.alert(f"A plugin with the name {plugin_info['name']} could not be loaded due to incompatible api version ({plugin_info['api_version']}).")
             return
         sys.path.append(path)
         main = plugin_info["main"].rsplit(".", 1)
