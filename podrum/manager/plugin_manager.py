@@ -52,6 +52,7 @@ class plugin_manager:
         if plugin_info["api_version"] != version.podrum_api_version:
             self.server.logger.alert(f"A plugin with the name {plugin_info['name']} could not be loaded due to incompatible api version ({plugin_info['api_version']}).")
             return
+        self.server.logger.info(f"Loading {plugin_info['name']}...")
         sys.path.append(path)
         main = plugin_info["main"].rsplit(".", 1)
         module = importlib.import_module(main[0])
@@ -64,6 +65,7 @@ class plugin_manager:
         if core_utils.has_attribute(main_class, "on_load"):
             self.plugins[plugin_info["name"]].on_load()
         self.plugin_count += 1
+        self.server.logger.success(f"Successfully loaded {plugin_info['name']}.")
         
     def load_all(self, path: str) -> None:
         for top, dirs, files in os.walk(path):
