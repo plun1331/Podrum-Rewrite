@@ -30,6 +30,7 @@
 ################################################################################
 
 class core_utils:
+    @staticmethod
     def has_attribute(item, attribute):
         try:
             getattr(item, attribute)
