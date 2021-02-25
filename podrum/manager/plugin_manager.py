@@ -37,12 +37,13 @@ import sys
 from zipfile import ZipFile
 
 class plugin_manager:
-    def __init__(self, server) -> None:
+    def __init__(self, server, path: str) -> None:
         self.server = server
         self.plugins: dict = {}
         self.plugin_count = 0
+        self.path = path
         
-    def load(self, path):
+    def load(self, path: str) -> None:
         plugin_file = ZipFile(path, "r")
         plugin_info = json.loads(plugin_file.read("info.json"))
         if plugin_info["name"] in self.plugins:
@@ -60,12 +61,18 @@ class plugin_manager:
         self.plugins[plugin_info["name"]].on_load()
         self.plugin_count += 1
         
-    def unload(self, name):
+    def load_all() -> None:
+        for file_name in os.listdir(self.path):
+            if os.path.isfile(path):
+                if path.endswith(".pyz"):
+                    self.load(path)
+        
+    def unload(self, name: str) -> None:
         if name in self.plugins:
             self.plugins[name].on_unload()
             del self.plugins[name]
             self.plugin_count -= 1
             
-    def unload_all(self):
+    def unload_all(self) -> None:
         for name in self.plugins:
             self.unload(name)
