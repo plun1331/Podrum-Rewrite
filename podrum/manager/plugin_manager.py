@@ -34,6 +34,7 @@ import importlib
 import json
 import os
 import sys
+from utils.core_utils import core_utils
 from zipfile import ZipFile
 
 class plugin_manager:
@@ -57,7 +58,7 @@ class plugin_manager:
         self.plugins[plugin_info["name"]].server = self.server
         self.plugins[plugin_info["name"]].version = info["version"] if "version" in plugin_info else ""
         self.plugins[plugin_info["name"]].description = info["description"] if "description" in plugin_info else ""
-        if getattr(main_class, "on_load"):
+        if core_utils.has_attribute(main_class, "on_load"):
             self.plugins[plugin_info["name"]].on_load()
         self.plugin_count += 1
         
@@ -70,7 +71,7 @@ class plugin_manager:
         
     def unload(self, name: str) -> None:
         if name in self.plugins:
-            if getattr(self.plugins[name], "on_unload"):
+            if core_utils.has_attribute(self.plugins[name], "on_unload"):
                 self.plugins[name].on_unload()
             del self.plugins[name]
             self.plugin_count -= 1
