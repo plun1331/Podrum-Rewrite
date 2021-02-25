@@ -80,6 +80,7 @@ class plugin_manager:
                 self.plugins[name].on_unload()
             del self.plugins[name]
             self.plugin_count -= 1
+            self.server.logger.info(f"Unloaded {name}.")
             
     def unload_all(self) -> None:
         for name in self.plugins:
