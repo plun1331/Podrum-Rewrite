@@ -56,3 +56,9 @@ class vanilla_commands:
     @staticmethod
     def version(args: list, sender, server) -> None:
         sender.send_message(f"This server is running Podrum version {version.podrum_version} {version.podrum_codename} on API {version.podrum_api_version} for mcbe {version.mcbe_version} ({version.mcbe_protocol}). This version is licensed under the {version.podrum_license} license.")
+
+    @staticmethod
+    def reload(args: list, sender, server) -> None:
+        self.send_message("Reloading...")
+        server.reload()
+        self.send_message("Successfully reloaded.")
