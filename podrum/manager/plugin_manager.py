@@ -29,5 +29,33 @@
 #                                                                              #
 ################################################################################
 
+from constant.version import version
+import importlib
+import json
+import os
+import sys
+from zipfile import ZipFile
+
 class plugin_manager:
-    pass
+    def __init__(self, server) -> None:
+        self.server = server
+        self.plugins: dict = {}
+        self.plugin_count = 0
+        
+    def load(self, path):
+        plugin_file = ZipFile(path, "r")
+        plugin_info = json.loads(plugin_file.read("info.json"))
+        if plugin_info["name"] in self.plugins:
+            return
+        if plugin_info["api"] != version.podrum_api:
+            return
+        sys.path.append(path)
+        main = pluginInfo["main"].rsplit(".", 1)
+        module = importlib.import_module(main[0])
+        main_class = getattr(module, main[1])
+        self.plugins[plugin_info["name"]] = main_class()
+        self.plugins[plugin_info["name"]].server = self.server
+        self.plugins[plugin_info["name"]].version = info["version"] if "version" in plugin_info else ""
+        self.plugins[plugin_info["name"]].description = info["description"] if "description" in plugin_info else ""
+        self.plugins[plugin_info["name"]].onStartup()
+        
