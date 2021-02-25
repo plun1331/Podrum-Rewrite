@@ -57,7 +57,8 @@ class plugin_manager:
         self.plugins[plugin_info["name"]].server = self.server
         self.plugins[plugin_info["name"]].version = info["version"] if "version" in plugin_info else ""
         self.plugins[plugin_info["name"]].description = info["description"] if "description" in plugin_info else ""
-        self.plugins[plugin_info["name"]].on_load()
+        if getattr(main_class, "on_load"):
+            self.plugins[plugin_info["name"]].on_load()
         self.plugin_count += 1
         
     def load_all(self, path: str) -> None:
@@ -69,7 +70,8 @@ class plugin_manager:
         
     def unload(self, name: str) -> None:
         if name in self.plugins:
-            self.plugins[name].on_unload()
+            if getattr(self.plugins[name], "on_unload"):
+                self.plugins[name].on_unload()
             del self.plugins[name]
             self.plugin_count -= 1
             
