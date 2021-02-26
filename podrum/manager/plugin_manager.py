@@ -63,7 +63,7 @@ class plugin_manager:
         self.plugins[plugin_info["name"]].version = plugin_info["version"] if "version" in plugin_info else ""
         self.plugins[plugin_info["name"]].description = plugin_info["description"] if "description" in plugin_info else ""
         self.plugins[plugin_info["name"]].author = plugin_info["author"] if "author" in plugin_info else ""
-        if core_utils.has_attribute(main_class, "on_load"):
+        if hasattr(main_class, "on_load"):
             self.plugins[plugin_info["name"]].on_load()
         self.plugin_count += 1
         self.server.logger.success(f"Successfully loaded {plugin_info['name']}.")
@@ -77,7 +77,7 @@ class plugin_manager:
         
     def unload(self, name: str) -> None:
         if name in self.plugins:
-            if core_utils.has_attribute(self.plugins[name], "on_unload"):
+            if hasattr(self.plugins[name], "on_unload"):
                 self.plugins[name].on_unload()
             del self.plugins[name]
             self.plugin_count -= 1
