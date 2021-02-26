@@ -34,7 +34,6 @@ import importlib
 import json
 import os
 import sys
-from utils.core_utils import core_utils
 from zipfile import ZipFile
 
 class plugin_manager:
