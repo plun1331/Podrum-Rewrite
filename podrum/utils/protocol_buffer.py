@@ -228,3 +228,11 @@ class protocol_buffer:
         else:
             return
         self.write(struct.pack(byte_order + "d", value))
+
+    def read_raknet_string(self) -> str:
+        length = self.read_ushort("big")
+        return self.read(length).decode()
+    
+    def write_raknet_string(self, value: str) -> None:
+        self.write_ushort(len(value), "big")
+        self.write(value.encode())
