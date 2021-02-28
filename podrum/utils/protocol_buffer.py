@@ -96,6 +96,30 @@ class protocol_buffer:
         else:
             return
         self.write(struct.pack(byte_order + "H", value))
+        
+    def read_triad(self, endianess: str) -> int:
+        if endianess.lower() == "big":
+            return struct.unpack(">l", b"\x00" + self.read(3))[0]
+        elif endianess.lower() == "little":
+            return struct.unpack(">l", self.read(3) + b"\x00")[0]
+        
+    def write_triad(self, value: int, endianess: str) -> None:
+        if endianess.lower() == "big":
+            self.write(struct.pack(">l", value)[1:])
+        elif endianess.lower() == "little":
+            self.write(struct.pack("<l", value[:-1]))
+            
+    def read_utriad(self, endianess: str) -> int:
+        if endianess.lower() == "big":
+            return struct.unpack(">L", b"\x00" + self.read(3))[0]
+        elif endianess.lower() == "little":
+            return struct.unpack(">L", self.read(3) + b"\x00")[0]
+        
+    def write_utriad(self, value: int, endianess: str) -> None:
+        if endianess.lower() == "big":
+            self.write(struct.pack(">L", value)[1:])
+        elif endianess.lower() == "little":
+            self.write(struct.pack("<L", value[:-1]))
 
     def read_int(self, endianess: str) -> int:
         if endianess.lower() == "big":
