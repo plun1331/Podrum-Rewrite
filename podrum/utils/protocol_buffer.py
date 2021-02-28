@@ -238,6 +238,7 @@ class protocol_buffer:
         self.write(value.encode())
 
     def read_raknet_address_ipv4(self) -> tuple:
+        self.read_uchar() # Version
         host = ".".join([
             str(~self.read_uchar() & 0xff),
             str(~self.read_uchar() & 0xff),
