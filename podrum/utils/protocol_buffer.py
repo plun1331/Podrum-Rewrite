@@ -48,3 +48,15 @@ class protocol_buffer:
 
     def write_char(self, value: int) -> None:
         self.write(struct.pack("b", value))
+        
+    def read_uchar(self) -> int:
+        return struct.unpack("B", self.read(1))[0]
+
+    def write_uchar(self, value: int) -> None:
+        self.write(struct.pack("B", value))
+        
+    def read_bool(self) -> bool:
+        return struct.unpack("?", self.read(1))[0]
+
+    def write_bool(self, value: bool) -> None:
+        self.write(struct.pack("?", value))
