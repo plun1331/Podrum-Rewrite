@@ -114,3 +114,21 @@ class protocol_buffer:
         else:
             return
         self.write(struct.pack(byte_order + "l", value))
+
+    def read_uint(self, endianess: str) -> int:
+        if endianess.lower() == "big":
+            byte_order = ">"
+        elif endianess.lower() == "little":
+            byte_order = "<"
+        else:
+            return
+        return struct.unpack(byte_order + "L", self.read(4))[0]
+
+    def write_uint(self, value: int, endianess: str) -> None:
+        if endianess.lower() == "big":
+            byte_order = ">"
+        elif endianess.lower() == "little":
+            byte_order = "<"
+        else:
+            return
+        self.write(struct.pack(byte_order + "L", value))
