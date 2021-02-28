@@ -251,7 +251,12 @@ class protocol_buffer:
             port = self.read_ushort("big")
             return raknet_address(host, port, version)
         if version == 6:
-            return raknet_address("", 0, version)
+            self.read_ushort("little")
+            port = self.read_ushort("big")
+            self.read_int("big")
+            host = socket.inet_ntop(socket.AF_INET6, self.read(16))
+            self.read_int("big")
+            return raknet_address(host, port, version)
     
     def write_raknet_address(self, value: raknet_address) -> None:
         self.write_uchar(value.version)
