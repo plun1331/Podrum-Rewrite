@@ -265,4 +265,9 @@ class protocol_buffer:
                 self.write_uchar(part)
             self.write_ushort(value.port, "big")
         elif value.version == 6:
-            pass
+            self.write_ushort(socket.AF_INET6, "little")
+            self.write_ushort(value.port, "big")
+            self.write_int(0, "big")
+            seld.write(socket.inet_pton(socket.AF_INET6, value.host))
+            self.write_int(0, "big")
+            
