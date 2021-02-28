@@ -248,6 +248,7 @@ class protocol_buffer:
         return host, port
     
     def write_raknet_address_ipv4(self, value: tuple) -> None:
+        self.write_uchar(4)
         for part in value[0].split("."):
             self.write_uchar(part)
         self.write_ushort(value[1], "big")
