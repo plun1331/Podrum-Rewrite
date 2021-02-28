@@ -236,3 +236,18 @@ class protocol_buffer:
     def write_raknet_string(self, value: str) -> None:
         self.write_ushort(len(value), "big")
         self.write(value.encode())
+
+    def read_raknet_address_ipv4(self) -> tuple:
+        host = ".".join([
+            str(~self.read_uchar() & 0xff),
+            str(~self.read_uchar() & 0xff),
+            str(~self.read_uchar() & 0xff),
+            str(~self.read_uchar() & 0xff)
+        ])
+        port = self.read_ushort("big")
+        return host, port
+    
+    def write_raknet_address_ipv4(self, value: tuple) -> None:
+        for part in value[0].split("."):
+            self.write_uchar(part)
+        self.write_ushort(value[1], "big")
