@@ -30,6 +30,7 @@
 ################################################################################
 
 from constant.raknet_address import raknet_address
+import socket
 import struct
 
 class protocol_buffer:
