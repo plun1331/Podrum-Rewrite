@@ -29,6 +29,7 @@
 #                                                                              #
 ################################################################################
 
+from constant.raknet_address import raknet_address
 import struct
 
 class protocol_buffer:
@@ -237,19 +238,25 @@ class protocol_buffer:
         self.write_ushort(len(value), "big")
         self.write(value.encode())
 
-    def read_raknet_address_ipv4(self) -> tuple:
-        self.read_uchar() # Version
-        host = ".".join([
-            str(~self.read_uchar() & 0xff),
-            str(~self.read_uchar() & 0xff),
-            str(~self.read_uchar() & 0xff),
-            str(~self.read_uchar() & 0xff)
-        ])
-        port = self.read_ushort("big")
-        return host, port
+    def read_raknet_address_ipv4(self) -> raknet_address:
+        version = self.read_uchar()
+        if version == 4
+            host = ".".join([
+                str(~self.read_uchar() & 0xff),
+                str(~self.read_uchar() & 0xff),
+                str(~self.read_uchar() & 0xff),
+                str(~self.read_uchar() & 0xff)
+            ])
+            port = self.read_ushort("big")
+            return raknet_address(host, port, version)
+        if version == 6:
+            return raknet_address("", 0, version)
     
-    def write_raknet_address_ipv4(self, value: tuple) -> None:
-        self.write_uchar(4)
-        for part in value[0].split("."):
-            self.write_uchar(part)
-        self.write_ushort(value[1], "big")
+    def write_raknet_address(self, value: raknet_address) -> None:
+        self.write_uchar(value.version)
+        if value.version == 4:
+            for part in value.host.split("."):
+                self.write_uchar(part)
+            self.write_ushort(value.port, "big")
+        elif value.version == 6:
+            pass
