@@ -32,12 +32,12 @@
 from utils.protocol_buffer import protocol_buffer
 
 class online_pong(protocol_buffer):
-    def read(self):
-        self.packet_id = self.read_uchar()
-        self.client_timestamp = self.read_ulong("big")
-        self.server_timestamp = self.read_ulong("big")
+    def read(self) -> None:
+        self.packet_id: int = self.read_uchar()
+        self.client_timestamp: int = self.read_ulong("big")
+        self.server_timestamp: int = self.read_ulong("big")
         
-    def write(self):
+    def write(self) -> None:
         self.write_uchar(self.packet_id)
         self.write_ulong(self.client_timestamp, "big")
         self.write_ulong(self.server_timestamp, "big")
