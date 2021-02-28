@@ -132,3 +132,39 @@ class protocol_buffer:
         else:
             return
         self.write(struct.pack(byte_order + "L", value))
+
+    def read_long(self, endianess: str) -> int:
+        if endianess.lower() == "big":
+            byte_order = ">"
+        elif endianess.lower() == "little":
+            byte_order = "<"
+        else:
+            return
+        return struct.unpack(byte_order + "q", self.read(8))[0]
+
+    def write_long(self, value: int, endianess: str) -> None:
+        if endianess.lower() == "big":
+            byte_order = ">"
+        elif endianess.lower() == "little":
+            byte_order = "<"
+        else:
+            return
+        self.write(struct.pack(byte_order + "q", value))
+        
+    def read_ulong(self, endianess: str) -> int:
+        if endianess.lower() == "big":
+            byte_order = ">"
+        elif endianess.lower() == "little":
+            byte_order = "<"
+        else:
+            return
+        return struct.unpack(byte_order + "Q", self.read(8))[0]
+
+    def write_ulong(self, value: int, endianess: str) -> None:
+        if endianess.lower() == "big":
+            byte_order = ">"
+        elif endianess.lower() == "little":
+            byte_order = "<"
+        else:
+            return
+        self.write(struct.pack(byte_order + "Q", value))
