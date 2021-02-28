@@ -168,3 +168,39 @@ class protocol_buffer:
         else:
             return
         self.write(struct.pack(byte_order + "Q", value))
+
+    def read_float(self, endianess: str) -> int:
+        if endianess.lower() == "big":
+            byte_order = ">"
+        elif endianess.lower() == "little":
+            byte_order = "<"
+        else:
+            return
+        return struct.unpack(byte_order + "f", self.read(4))[0]
+
+    def write_float(self, value: int, endianess: str) -> None:
+        if endianess.lower() == "big":
+            byte_order = ">"
+        elif endianess.lower() == "little":
+            byte_order = "<"
+        else:
+            return
+        self.write(struct.pack(byte_order + "f", value))
+        
+    def read_double(self, endianess: str) -> int:
+        if endianess.lower() == "big":
+            byte_order = ">"
+        elif endianess.lower() == "little":
+            byte_order = "<"
+        else:
+            return
+        return struct.unpack(byte_order + "d", self.read(8))[0]
+
+    def write_double(self, value: int, endianess: str) -> None:
+        if endianess.lower() == "big":
+            byte_order = ">"
+        elif endianess.lower() == "little":
+            byte_order = "<"
+        else:
+            return
+        self.write(struct.pack(byte_order + "d", value))
