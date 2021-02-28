@@ -32,13 +32,19 @@
 import struct
 
 class protocol_buffer:
-    def __init__(self, data = b"", pos = 0):
-        self.data = data
-        self.pos = pos
+    def __init__(self, data: bytes = b"", pos: int = 0) -> None:
+        self.data: bytes = data
+        self.pos: int = pos
         
-    def read(self, byte_count):
+    def read(self, byte_count: int) -> bytes:
         self.pos += byte_count
         return self.data[self.pos - byte_count: self.pos]
 
-    def write(self, data):
+    def write(self, data: bytes) -> None:
         self.data += data
+        
+    def read_char(self) -> int:
+        return struct.unpack("b", self.read(1))[0]
+
+    def write_char(self, value: int) -> None:
+        self.write(struct.pack("b", value))
