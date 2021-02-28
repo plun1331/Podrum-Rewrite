@@ -241,7 +241,7 @@ class protocol_buffer:
 
     def read_raknet_address_ipv4(self) -> raknet_address:
         version = self.read_uchar()
-        if version == 4
+        if version == 4:
             host = ".".join([
                 str(~self.read_uchar() & 0xff),
                 str(~self.read_uchar() & 0xff),
