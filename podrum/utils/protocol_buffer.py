@@ -60,3 +60,21 @@ class protocol_buffer:
 
     def write_bool(self, value: bool) -> None:
         self.write(struct.pack("?", value))
+
+    def read_short(self, endianess: str) -> int:
+        if endianess.lower() == "big":
+            byte_order = ">"
+        elif endianess.lower() == "little":
+            byte_order = "<"
+        else:
+            return
+        return struct.unpack(byte_order + "h", self.read(1))[0]
+
+    def write_short(self, value: int, endianess: str) -> None:
+        if endianess.lower() == "big":
+            byte_order = ">"
+        elif endianess.lower() == "little":
+            byte_order = "<"
+        else:
+            return
+        self.write(struct.pack(byte_order + "h", value))
