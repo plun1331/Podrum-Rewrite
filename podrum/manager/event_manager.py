@@ -33,20 +33,19 @@ class event_manager:
     def __init__(self, server):
         self.server = server
         self.events = {}
-        
+
     def register(self, function, event: str) -> None:
         if event in self.events:
             self.events[event].append(function)
         else:
             self.events[event]: list = [function]
-    
+
     def dispatch(self, event, *args) -> None:
         for function in self.events.get(event, []):
             function(*args)
-            
-    def remove(self, function, name):
-        if name in self.events:
-            if function in name:
-                self.events[name].remove(function)
-                if not self.events[name]:
-                    del self.events[name]
+
+    def remove(self, function, event):
+        if function in self.events.get(event, []):
+            self.events[event].remove(function)
+            if not self.events[event]:
+                del self.events[event]
