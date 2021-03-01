@@ -44,3 +44,8 @@ class event_manager():
         event_functions = self.events[event]
         for function in event_functions:
             function(*args)
+            
+    def remove(self, function, name):
+        if name in self.events:
+            if function in name:
+                self.events[name].remove(function)
