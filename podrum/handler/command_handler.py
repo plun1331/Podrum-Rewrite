@@ -31,7 +31,6 @@
 
 from threading import Thread
 
-
 class command_handler(Thread):
     def __init__(self, server) -> None:
         super().__init__()
@@ -39,7 +38,6 @@ class command_handler(Thread):
         self.stopped = False
 
     def handle_command(self, user_input: str) -> None:
-        self.server.event_manager.dispatch('message', self.server, user_input)
         if len(user_input) > 0:
             raw_command = user_input.split()
             command_name = raw_command[0]
