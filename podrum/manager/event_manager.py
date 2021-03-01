@@ -41,11 +41,11 @@ class event_manager:
             self.events[event]: list = [function]
     
     def dispatch(self, event, *args) -> None:
-        event_functions = self.events[event]
-        for function in event_functions:
-            function(*args)
+        if event in self.events:
+            for function in self.events[event]:
+                function(*args)
             
     def remove(self, function, name):
         if name in self.events:
-            if function in name:
+            if function in self.events[name]:
                 self.events[name].remove(function)
