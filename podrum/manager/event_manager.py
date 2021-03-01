@@ -39,12 +39,14 @@ class event_manager:
         else:
             self.events[event]: list = [function]
 
-    def dispatch(self, event, *args) -> None:
-        for function in self.events.get(event, []):
-            function(*args)
+    def dispatch(self, event: str, *args) -> None:
+        if event in self.events:
+            for function in self.events[event]:
+                function(*args)
 
-    def remove(self, function, event):
-        if function in self.events.get(event, []):
-            self.events[event].remove(function)
-            if not self.events[event]:
-                del self.events[event]
+    def remove(self, function, event: str) -> None:
+        if event in self.events:
+            if function in self.events[event]:
+                self.events[event].remove(function)
+                if len(self.events[event]) == 0:
+                    del self.events[event]
