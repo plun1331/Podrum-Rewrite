@@ -29,7 +29,7 @@
 #                                                                              #
 ################################################################################
 
-class event_manager():
+class event_manager:
     def __init__(self, server):
         self.server = self.server
         self.events = {}
