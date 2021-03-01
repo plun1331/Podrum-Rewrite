@@ -45,7 +45,7 @@ class server:
         self.command_handler = command_handler(self)
         self.logger = logger()
         self.plugin_manager = plugin_manager(self)
-        self.event_manager = event_manager(self)
+        self.event_manager = event_manager()
         self.start()
 
     def register_vanilla_commands(self) -> None:

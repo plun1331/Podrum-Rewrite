@@ -30,8 +30,7 @@
 ################################################################################
 
 class event_manager:
-    def __init__(self, server):
-        self.server = server
+    def __init__(self):
         self.events = {}
 
     def register(self, function, event: str) -> None:
