@@ -46,7 +46,7 @@ class udp_server_socket:
         try:
             self.socket.bind((host, port))
         except socket.error:
-            raise Exception(f"Failed to bind to {str(address.port)}")
+            raise Exception(f"Failed to bind to {str(port)}")
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
             
