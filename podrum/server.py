@@ -33,8 +33,8 @@ from constant.misc import misc
 from constant.vanilla_commands import vanilla_commands
 from handler.command_handler import command_handler
 from manager.command_manager import command_manager
-from manager.plugin_manager import plugin_manager
 from manager.event_manager import event_manager
+from manager.plugin_manager import plugin_manager
 import time
 from utils.logger import logger
 
