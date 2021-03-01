@@ -34,8 +34,10 @@ from constant.vanilla_commands import vanilla_commands
 from handler.command_handler import command_handler
 from manager.command_manager import command_manager
 from manager.plugin_manager import plugin_manager
+from manager.event_manager import event_manager
 import time
 from utils.logger import logger
+
 
 class server:
     def __init__(self) -> None:
@@ -43,6 +45,7 @@ class server:
         self.command_handler = command_handler(self)
         self.logger = logger()
         self.plugin_manager = plugin_manager(self)
+        self.event_manager = event_manager(self)
         self.start()
 
     def register_vanilla_commands(self) -> None:
@@ -52,7 +55,7 @@ class server:
         self.command_manager.register(vanilla_commands.version, "Version Command")
         self.command_manager.register(vanilla_commands.reload, "Reload Command")
         self.command_manager.register(vanilla_commands.plugins, "Plugins Command")
-        
+
     def get_plugin_main(self, name):
         if name in self.plugin_manager.plugins:
             return self.plugin_manager.plugins[name]
@@ -66,7 +69,7 @@ class server:
         finnish_time = time.time()
         startup_time = "%.3f" % (finnish_time - start_time)
         self.logger.success(f"Done in {startup_time}. Type help to view all available commands.")
-        
+
     def stop(self) -> None:
         self.command_handler.stop_handler()
         self.plugin_manager.unload_all()
