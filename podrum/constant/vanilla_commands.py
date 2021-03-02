@@ -65,4 +65,4 @@ class vanilla_commands:
                                 
     @staticmethod
     def plugins(args: list, sender, server) -> None:
-        sender.send_message(f"Plugins({server.plugin_manager.plugin_count}): {', '.join(server.plugin_manager.plugins)}")
+        sender.send_message(f"Plugins({len(server.plugin_manager.plugins)}): {', '.join(server.plugin_manager.plugins)}")
