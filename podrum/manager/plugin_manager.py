@@ -40,7 +40,6 @@ class plugin_manager:
     def __init__(self, server) -> None:
         self.server = server
         self.plugins: dict = {}
-        self.plugin_count = 0
         
     def load(self, path: str) -> None:
         plugin_file = ZipFile(path, "r")
@@ -64,7 +63,6 @@ class plugin_manager:
         self.plugins[plugin_info["name"]].author = plugin_info["author"] if "author" in plugin_info else ""
         if hasattr(main_class, "on_load"):
             self.plugins[plugin_info["name"]].on_load()
-        self.plugin_count += 1
         self.server.logger.success(f"Successfully loaded {plugin_info['name']}.")
         
     def load_all(self, path: str) -> None:
@@ -79,7 +77,6 @@ class plugin_manager:
             if hasattr(self.plugins[name], "on_unload"):
                 self.plugins[name].on_unload()
             del self.plugins[name]
-            self.plugin_count -= 1
             self.server.logger.info(f"Unloaded {name}.")
             
     def unload_all(self) -> None:
