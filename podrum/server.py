@@ -66,8 +66,8 @@ class server:
         self.plugin_manager.load_all(misc.plugin_dir)
         self.register_vanilla_commands()
         self.command_handler.start_handler()
-        finnish_time = time.time()
-        startup_time = "%.3f" % (finnish_time - start_time)
+        finish_time = time.time()
+        startup_time = "%.3f" % (finish_time - start_time)
         self.logger.success(f"Done in {startup_time}. Type help to view all available commands.")
 
     def stop(self) -> None:
