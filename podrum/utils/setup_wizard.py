@@ -44,27 +44,32 @@ def yesNo(user_input):
 
 
 class setup_wizard:
-    step = 0
-    config = {'port': 19132,
-              'motd': 'A Podrum server.',
-              'gamemode': 0,
-              'max_players': 5}
-
     def __init__(self):
-        while self.step == 0:
-            self.step_one()
-        while self.step == 1:
-            self.step_two()
-        while self.step == 2:
-            self.step_three()
-        while self.step == 3:
-            self.step_four()
-        while self.step == 4:
-            self.step_five()
-        while self.step == 5:
-            self.step_six()
-        while self.step == 6:
-            self.step_seven()
+        self.config = {
+            "port": 19132,
+            "motd": 'A Podrum server.',
+            "gamemode": 0,
+            "max_players": 5
+        }
+        self.step = 0
+        self.start_setup()
+                   
+    def start_setup(self):
+        while 0 <= self.step <= 6:
+            if self.step == 0:
+                self.step_one()
+            elif self.step == 1:
+                self.step_two()
+            elif self.step == 2:
+                self.step_three()
+            elif self.step == 3:
+                self.step_four()
+            elif self.step == 4:
+                self.step_five()
+            elif self.step == 5:
+                self.step_six()
+            elif self.step == 6:
+                self.step_seven()
 
     def step_one(self):
         t = translation_manager.get_languages()
