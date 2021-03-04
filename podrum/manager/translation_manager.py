@@ -28,12 +28,40 @@
 # IN THE SOFTWARE.                                                             #
 #                                                                              #
 ################################################################################
-import os
 
-from server import server
-from utils.setup_wizard import setup_wizard
+import json
+from constant.misc import misc
 
-if __name__ == "__main__":
-    if not os.path.exists(f'{os.getcwd()}/podrum/server.json'):
-        setup_wizard()
-    server()
+
+class translation_manager:
+    languages: dict = {}
+    language: str = 'en'
+    translations: dict = {}
+
+    @classmethod
+    def get_translation(cls, key: str) -> str:
+        key = key.split('/')
+        if cls.translations == {}:
+            with open(f'{misc.translation_dir}/{cls.language}.json', 'r') as f:
+                cls.translations = json.load(f)
+        cd = cls.translations
+        for subkey in key:
+            cd = cd[str(subkey)]
+        return cd
+
+    @classmethod
+    def set_language(cls, language: str) -> None:
+        language = language.lower()
+        cls.language = language
+        languages = cls.get_languages()
+        if language not in languages.keys():
+            raise ValueError("Invalid language.")
+        with open(f'{misc.translation_dir}/{language}.json', 'r') as f:
+            cls.translations = json.load(f)
+
+    @classmethod
+    def get_languages(cls) -> dict:
+        if cls.languages == {}:
+            with open(f'{misc.translation_dir}/languages.json') as f:
+                cls.languages = json.load(f)
+        return cls.languages

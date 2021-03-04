@@ -41,5 +41,5 @@ class offline_ping(protocol_buffer):
     def write(self) -> None:
         self.write_uchar(self.packet_id)
         self.write_ulong(self.client_timestamp, "big")
-        self.write(self.magic)
+        super().write(self.magic)
         self.write_ulong(self.client_guid, "big")
