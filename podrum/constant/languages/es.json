@@ -55,10 +55,10 @@
     "invalid_cmd": "¡Comando inválido!"
   },
   "plugins": {
-    "loading": "Cargando {0['name']}...",
-    "loaded": "Cargado exitosamente {0['name']}.",
-    "duplicate": "Ya existe un complemento con el nombre {0['name']}.",
-    "incompatible": "No se pudo cargar un complemento con el nombre {0['name']} debido a una versión de API incompatible ({0['api_version']}).",
+    "loading": "Cargando {0[name]}...",
+    "loaded": "Cargado exitosamente {0[name]}.",
+    "duplicate": "Ya existe un complemento con el nombre {0[name]}.",
+    "incompatible": "No se pudo cargar un complemento con el nombre {0[name]} debido a una versión de API incompatible ({0[api_version]}).",
     "unloaded": "Descargado {0}."
   }
 }

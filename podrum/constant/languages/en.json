@@ -55,10 +55,10 @@
     "invalid_cmd": "Invalid command!"
   },
   "plugins": {
-    "loading": "Loading {0['name']}...",
-    "loaded": "Successfully loaded {0['name']}.",
-    "duplicate": "A plugin with the name {0['name']} already exists.",
-    "incompatible": "A plugin with the name {0['name']} could not be loaded due to incompatible api version ({0['api_version']}).",
+    "loading": "Loading {0[name]}...",
+    "loaded": "Successfully loaded {0[name]}.",
+    "duplicate": "A plugin with the name {0[name]} already exists.",
+    "incompatible": "A plugin with the name {0[name]} could not be loaded due to incompatible api version ({0[api_version]}).",
     "unloaded": "Unloaded {0}."
   }
 }
