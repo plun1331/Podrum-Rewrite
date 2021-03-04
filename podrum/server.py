@@ -74,7 +74,7 @@ class server:
         self.command_handler.start_handler()
         finnish_time = time.time()
         startup_time = "%.3f" % (finnish_time - start_time)
-        self.logger.success(translation_manager.get_translation('serverStarted').format(startup_time))
+        self.logger.success(translation_manager.get_translation('server_started').format(startup_time))
 
     def stop(self) -> None:
         self.command_handler.stop_handler()

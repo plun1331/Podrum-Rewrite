@@ -1,22 +1,22 @@
 {
-  "serverStarted": "Done in {0}s. Type help to view all available commands.",
-  "invalidIPVersion": "Unknown address version {0}",
-  "bindError": "Failed to bind to {0}",
+  "server_started": "Done in {0}s. Type help to view all available commands.",
+  "invalid_IP_version": "Unknown address version {0}",
+  "bind_error": "Failed to bind to {0}",
   "wizard": {
-    "langSelected": "{0} has been set as the default language.",
-    "licensePrompt": "Podrum is licenced under the {0} license. Do you accept this license? (y/n): ",
-    "invalidInput": "Invalid input.",
-    "acceptLicense": "You must accept the license to use this software.",
-    "continuePrompt": "Would you like to continue with the setup wizard? (y/n): ",
+    "lang_selected": "{0} has been set as the default language.",
+    "license_prompt": "Podrum is licenced under the {0} license. Do you accept this license? (y/n): ",
+    "invalid_input": "Invalid input.",
+    "accept_license": "You must accept the license to use this software.",
+    "continue_prompt": "Would you like to continue with the setup wizard? (y/n): ",
     "skipped": "Skipping the setup wizard...",
-    "selectPort": "What should the server port be? (Default 19132): ",
-    "portSet": "Server port set to {0}.",
-    "selectMOTD": "What should the server's MOTD be? (Default 'A Podrum server.'): ",
-    "MOTDSet": "Server MOTD set to '{0}'.",
-    "selectGamemode": "What should the server's default gamemode be? (0, 1, 2 | Default 0): ",
-    "gamemodeSet": "Default gamemode set to {0}.",
-    "selectMaxPlayers": "What should the maximum player count be? (Default 5): ",
-    "maxPlayersSet": "Set the maximum player count to {0}.",
+    "select_port": "What should the server port be? (Default 19132): ",
+    "port_set": "Server port set to {0}.",
+    "select_motd": "What should the server's MOTD be? (Default 'A Podrum server.'): ",
+    "motd_set": "Server MOTD set to '{0}'.",
+    "select_gamemode": "What should the server's default gamemode be? (0, 1, 2 | Default 0): ",
+    "gamemode_set": "Default gamemode set to {0}.",
+    "select_max_players": "What should the maximum player count be? (Default 5): ",
+    "max_players_set": "Set the maximum player count to {0}.",
     "complete": "The setup wizard has been completed! Starting the server..."
   },
   "logger": {
@@ -52,7 +52,7 @@
       },
       "plugins": "Plugins"
     },
-    "invalidCMD": "Invalid command!"
+    "invalid_cmd": "Invalid command!"
   },
   "plugins": {
     "loading": "Loading {0['name']}...",

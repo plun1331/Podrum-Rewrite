@@ -34,9 +34,6 @@ from constant.misc import misc
 
 
 class translation_manager:
-    r"""
-
-    """
     languages: dict = {}
     language: str = 'en'
     translations: dict = {}

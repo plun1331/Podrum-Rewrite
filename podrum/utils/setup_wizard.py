@@ -48,7 +48,7 @@ class setup_wizard:
     config = {'port': 19132,
               'motd': 'A Podrum server.',
               'gamemode': 0,
-              'maxPlayers': 5}
+              'max_players': 5}
 
     def __init__(self):
         while self.step == 0:
@@ -79,21 +79,21 @@ class setup_wizard:
             return
         self.config['language'] = select_lang.lower()
         translation_manager.set_language(select_lang.lower())
-        print(translation_manager.get_translation('wizard/langSelected').format(t[select_lang.lower()]))
+        print(translation_manager.get_translation('wizard/lang_selected').format(t[select_lang.lower()]))
         self.step += 1
 
     def step_two(self):
-        yn = input(f"> {translation_manager.get_translation('wizard/licensePrompt').format(version.podrum_license)}")
+        yn = input(f"> {translation_manager.get_translation('wizard/license_prompt').format(version.podrum_license)}")
         if yesNo(yn) is None:
             return
         if not yesNo(yn):
-            print(translation_manager.get_translation('wizard/acceptLicense'))
+            print(translation_manager.get_translation('wizard/accept_license'))
             return
         self.step += 1
 
     def step_three(self):
         print(misc.logo)
-        yn = input(f"> {translation_manager.get_translation('wizard/continuePrompt')}")
+        yn = input(f"> {translation_manager.get_translation('wizard/continue_prompt')}")
         if not yesNo(yn):
             print(translation_manager.get_translation('wizard/skipped'))
             with open(os.getcwd() + '/podrum/server.json', 'w') as f:
@@ -103,39 +103,40 @@ class setup_wizard:
         self.step += 1
 
     def step_four(self):
-        port = input(f"> {translation_manager.get_translation('wizard/selectPort')}")
+        port = input(f"> {translation_manager.get_translation('wizard/select_port')}")
         if port == '':
             port = '19132'
         if port.isdigit():
             self.config['port'] = int(port)
         else:
             return
-        print(translation_manager.get_translation('wizard/portSet').format(self.config['port']))
+        print(translation_manager.get_translation('wizard/port_set').format(self.config['port']))
         self.step += 1
 
     def step_five(self):
-        gamemode = input(f"> {translation_manager.get_translation('wizard/selectGamemode')}")
+        gamemode = input(f"> {translation_manager.get_translation('wizard/select_gamemode')}")
         if gamemode == '':
             gamemode = '0'
         if gamemode.isdigit():
             self.config['gamemode'] = int(gamemode)
         else:
             return
-        print(translation_manager.get_translation('wizard/gamemodeSet').format(self.config['gamemode']))
+        print(translation_manager.get_translation('wizard/gamemode_set').format(self.config['gamemode']))
         self.step += 1
 
     def step_six(self):
-        max_players = input(f"> {translation_manager.get_translation('wizard/selectMaxPlayers')}")
+        max_players = input(f"> {translation_manager.get_translation('wizard/select_max_players')}")
         if max_players == '':
             max_players = '5'
         if max_players.isdigit():
-            self.config['maxPlayers'] = int(max_players)
+            self.config['max_players'] = int(max_players)
         else:
             return
-        print(translation_manager.get_translation('wizard/maxPlayersSet').format(self.config['maxPlayers']))
+        print(translation_manager.get_translation('wizard/max_players_set').format(self.config['max_players']))
         self.step += 1
 
     def step_seven(self):
         print(translation_manager.get_translation('wizard/complete'))
         with open(os.getcwd() + '/podrum/server.json', 'w') as f:
             json.dump(self.config, f)
+        self.step += 1

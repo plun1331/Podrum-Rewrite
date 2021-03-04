@@ -31,7 +31,7 @@
 
 from threading import Thread
 
-from constant.translations import translations
+from manager.translation_manager import translation_manager
 
 
 class command_handler(Thread):
@@ -49,7 +49,7 @@ class command_handler(Thread):
             if command_name in commands:
                 self.server.command_manager.execute(command_name, command_args, self.server)
             else:
-                self.server.logger.error(translations.get_translation('commands/invalidCMD'))
+                self.server.logger.error(translation_manager.get_translation('commands/invalid_cmd'))
 
     def start_handler(self) -> None:
         self.stopped = False
