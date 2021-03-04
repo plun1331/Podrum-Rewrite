@@ -102,7 +102,7 @@ class protocol_buffer:
     def read_triad(self, endianess: str) -> int:
         if endianess.lower() == "big":
             return struct.unpack(">l", b"\x00" + self.read(3))[0]
-        elif endianess.lower() == "little":
+        if endianess.lower() == "little":
             return struct.unpack(">l", self.read(3) + b"\x00")[0]
         
     def write_triad(self, value: int, endianess: str) -> None:
@@ -114,7 +114,7 @@ class protocol_buffer:
     def read_utriad(self, endianess: str) -> int:
         if endianess.lower() == "big":
             return struct.unpack(">L", b"\x00" + self.read(3))[0]
-        elif endianess.lower() == "little":
+        if endianess.lower() == "little":
             return struct.unpack(">L", self.read(3) + b"\x00")[0]
         
     def write_utriad(self, value: int, endianess: str) -> None:
