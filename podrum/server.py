@@ -72,15 +72,12 @@ class server:
         self.plugin_manager.load_all(misc.plugin_dir)
         self.register_vanilla_commands()
         self.command_handler.start_handler()
-<<<<<<< HEAD
         finnish_time = time.time()
         startup_time = "%.3f" % (finnish_time - start_time)
         self.logger.success(translations.get_translation('serverStarted').format(startup_time))
-=======
         finish_time = time.time()
         startup_time = "%.3f" % (finish_time - start_time)
         self.logger.success(f"Done in {startup_time}. Type help to view all available commands.")
->>>>>>> 9191d4e2ba335caac4b4099c244622191c7da3be
 
     def stop(self) -> None:
         self.command_handler.stop_handler()
