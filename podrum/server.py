@@ -35,6 +35,7 @@ from handler.command_handler import command_handler
 from manager.command_manager import command_manager
 from manager.event_manager import event_manager
 from manager.plugin_manager import plugin_manager
+import os
 import time
 from utils.logger import logger
 
@@ -59,6 +60,9 @@ class server:
     def get_plugin_main(self, name):
         if name in self.plugin_manager.plugins:
             return self.plugin_manager.plugins[name]
+        
+    def get_podrum_root(self):
+        return os.path.abspath(os.path.dirname(__file__))
 
     def start(self) -> None:
         start_time = time.time()
