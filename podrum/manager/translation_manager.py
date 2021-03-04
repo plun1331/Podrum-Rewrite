@@ -35,14 +35,14 @@ from constant.misc import misc
 
 class translation_manager:
     languages: dict = {}
-    language: str = 'en'
+    language: str = "en"
     translations: dict = {}
 
     @classmethod
     def get_translation(cls, key: str) -> str:
-        key = key.split('/')
+        key = key.split("/")
         if cls.translations == {}:
-            with open(f'{misc.translation_dir}/{cls.language}.json', 'r') as f:
+            with open(f"{misc.translation_dir}/{cls.language}.json", "r") as f:
                 cls.translations = json.load(f)
         cd = cls.translations
         for subkey in key:
@@ -56,12 +56,12 @@ class translation_manager:
         languages = cls.get_languages()
         if language not in languages.keys():
             raise ValueError("Invalid language.")
-        with open(f'{misc.translation_dir}/{language}.json', 'r') as f:
+        with open(f"{misc.translation_dir}/{language}.json", "r") as f:
             cls.translations = json.load(f)
 
     @classmethod
     def get_languages(cls) -> dict:
         if cls.languages == {}:
-            with open(f'{misc.translation_dir}/languages.json') as f:
+            with open(f"{misc.translation_dir}/languages.json") as f:
                 cls.languages = json.load(f)
         return cls.languages
