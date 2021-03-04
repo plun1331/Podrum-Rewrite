@@ -35,13 +35,11 @@ from manager.translation_manager import translation_manager
 from constant.version import version
 from constant.misc import misc
 
-
-def yesNo(user_input):
+def yes_no(user_input):
     if user_input.lower() in ('y', 'yes'):
         return True
     if user_input.lower() in ('n', 'no'):
         return False
-
 
 class setup_wizard:
     def __init__(self):
@@ -89,9 +87,9 @@ class setup_wizard:
 
     def step_two(self):
         yn = input(f"> {translation_manager.get_translation('wizard/license_prompt').format(version.podrum_license)}")
-        if yesNo(yn) is None:
+        if yes_no(yn) is None:
             return
-        if not yesNo(yn):
+        if not yes_no(yn):
             print(translation_manager.get_translation('wizard/accept_license'))
             return
         self.step += 1
@@ -99,7 +97,7 @@ class setup_wizard:
     def step_three(self):
         print(misc.logo)
         yn = input(f"> {translation_manager.get_translation('wizard/continue_prompt')}")
-        if not yesNo(yn):
+        if not yes_no(yn):
             print(translation_manager.get_translation('wizard/skipped'))
             with open(os.getcwd() + '/podrum/server.json', 'w') as f:
                 json.dump(self.config, f)
