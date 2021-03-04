@@ -32,7 +32,6 @@
 import json
 from constant.misc import misc
 
-
 class translation_manager:
     languages: dict = {}
     language: str = "en"
