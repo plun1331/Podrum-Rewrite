@@ -30,16 +30,6 @@
 ################################################################################
 
 class raknet_address:
-    r"""
-    Information for RakNet.
-
-    :param host: The server's hostname.
-    :type host: str
-    :param port: The server's port.
-    :type port: int
-    :param version: The IP version the server is using. Either 4 or 6.
-    :type version: int
-    """
     def __init__(self, host: str, port: int, version: int = 4) -> None:
         self.host = host
         self.port = port

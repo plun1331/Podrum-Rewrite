@@ -274,6 +274,6 @@ class protocol_buffer:
             self.write_ushort(socket.AF_INET6, "little")
             self.write_ushort(value.port, "big")
             self.write_int(0, "big")
-            self.write(socket.inet_pton(socket.AF_INET6, value.host))
+            seld.write(socket.inet_pton(socket.AF_INET6, value.host))
             self.write_int(0, "big")
             

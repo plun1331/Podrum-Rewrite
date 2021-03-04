@@ -30,7 +30,6 @@
 ################################################################################
 
 from constant.version import version
-from manager.translation_manager import translation_manager
 import os
 
 class vanilla_commands:
@@ -43,27 +42,27 @@ class vanilla_commands:
 
     @staticmethod
     def stop(args: list, sender, server) -> None:
-        sender.send_message(translation_manager.get_translation('commands/content/stop/0'))
+        sender.send_message("Stopping server...")
         server.stop()
-        sender.send_message(translation_manager.get_translation('commands/content/stop/1'))
+        sender.send_message("Server stopped.")
         os.kill(os.getpid(), 15)
         
     @staticmethod
     def help(args: list, sender, server) -> None:
-        sender.send_message(f"--- {translation_manager.get_translation('commands/content/help')} ---")
+        sender.send_message("--- Showing help ---")
         for name, info in dict(server.command_manager.commands).items():
             sender.send_message(f"/{name}: {info['description']}")
           
     @staticmethod
     def version(args: list, sender, server) -> None:
-        sender.send_message(translation_manager.get_translation('commands/content/version').format(version))
+        sender.send_message(f"This server is running Podrum version {version.podrum_version} {version.podrum_codename} on API {version.podrum_api_version} for mcbe {version.mcbe_version} ({version.mcbe_protocol}). This version is licensed under the {version.podrum_license} license.")
 
     @staticmethod
     def reload(args: list, sender, server) -> None:
-        sender.send_message(translation_manager.get_translation('commands/content/reload/0'))
+        sender.send_message("Reloading...")
         server.plugin_manager.reload_all()
-        sender.send_message(translation_manager.get_translation('commands/content/reload/1'))
+        sender.send_message("Successfully reloaded.")
                                 
     @staticmethod
     def plugins(args: list, sender, server) -> None:
-        sender.send_message(f"{translation_manager.get_translation('commands/content/plugins')}({len(server.plugin_manager.plugins)}): {', '.join(server.plugin_manager.plugins)}")
+        sender.send_message(f"Plugins({len(server.plugin_manager.plugins)}): {', '.join(server.plugin_manager.plugins)}")

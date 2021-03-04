@@ -30,7 +30,6 @@
 ################################################################################
 
 import socket
-from manager.translation_manager import translation_manager
 
 class udp_server_socket:
     def __init__(self, host: str, port: int, version: int = 4) -> None:
@@ -43,11 +42,11 @@ class udp_server_socket:
             self.socket: socket.socket = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM, socket.SOL_UDP)
             self.socket.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_V6ONLY, 1)
         else:
-            raise Exception(translation_manager.get_translation('invalid_IP_version').format(version))
+            raise Exception(f"Unknown address version {version}")
         try:
             self.socket.bind((host, port))
         except socket.error:
-            raise Exception(translation_manager.get_translation('bind_error').format(port))
+            raise Exception(f"Failed to bind to {str(port)}")
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
             

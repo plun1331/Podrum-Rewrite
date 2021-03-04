@@ -31,12 +31,8 @@
 
 import os
 
-
 class misc:
-    r"""
-    Some constants such as the software's logo and file paths.
-    """
-    logo: str = """
+    logo: str =  """
          ____           _                      
         |  _ \ ___   __| |_ __ _   _ _ __ ___  
         | |_) / _ \ / _` | '__| | | | '_ ` _ \ 
@@ -44,4 +40,3 @@ class misc:
         |_|   \___/ \__,_|_|   \__,_|_| |_| |_|
     """
     plugin_dir = os.getcwd() + "/plugins"
-    translation_dir = os.getcwd() + "/podrum/constant/languages"
