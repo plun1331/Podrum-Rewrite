@@ -30,6 +30,7 @@
 ################################################################################
 
 from constant.version import version
+from constant.translations import translations
 import importlib
 import json
 import os
@@ -45,12 +46,12 @@ class plugin_manager:
         plugin_file = ZipFile(path, "r")
         plugin_info = json.loads(plugin_file.read("info.json"))
         if plugin_info["name"] in self.plugins:
-            self.server.logger.alert(f"A plugin with the name {plugin_info['name']} already exists.")
+            self.server.logger.alert(translations.get_translation('plugins/duplicate').format(plugin_info))
             return
         if plugin_info["api_version"] != version.podrum_api_version:
-            self.server.logger.alert(f"A plugin with the name {plugin_info['name']} could not be loaded due to incompatible api version ({plugin_info['api_version']}).")
+            self.server.logger.alert(translations.get_translation('plugins/incompatible').format(plugin_info))
             return
-        self.server.logger.info(f"Loading {plugin_info['name']}...")
+        self.server.logger.info(translations.get_translation('plugins/loading').format(plugin_info))
         sys.path.append(path)
         main = plugin_info["main"].rsplit(".", 1)
         module = importlib.import_module(main[0])
@@ -63,7 +64,7 @@ class plugin_manager:
         self.plugins[plugin_info["name"]].author = plugin_info["author"] if "author" in plugin_info else ""
         if hasattr(main_class, "on_load"):
             self.plugins[plugin_info["name"]].on_load()
-        self.server.logger.success(f"Successfully loaded {plugin_info['name']}.")
+        self.server.logger.success(translations.get_translation('plugins/loaded').format(plugin_info))
         
     def load_all(self, path: str) -> None:
         for top, dirs, files in os.walk(path):
@@ -77,7 +78,7 @@ class plugin_manager:
             if hasattr(self.plugins[name], "on_unload"):
                 self.plugins[name].on_unload()
             del self.plugins[name]
-            self.server.logger.info(f"Unloaded {name}.")
+            self.server.logger.info(translations.get_translation('plugins/loaded').format(name))
             
     def unload_all(self) -> None:
         for name in dict(self.plugins):

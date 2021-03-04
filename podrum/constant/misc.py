@@ -40,3 +40,4 @@ class misc:
         |_|   \___/ \__,_|_|   \__,_|_| |_| |_|
     """
     plugin_dir = os.getcwd() + "/plugins"
+    translation_dir = os.getcwd() + "/podrum/constant/languages"

@@ -30,6 +30,7 @@
 ################################################################################
 
 from constant.text_format import text_format
+from constant.translations import translations
 from datetime import datetime
 import inspect
 import sys
@@ -63,7 +64,7 @@ class logger:
             color: str = text_format.gray
         else:
             return
-        print(f"{color}[{log_type.upper()}: {date_time.strftime('%H:%M')}]{text_format.white} {content}")
+        print(f"{color}[{translations.get_translation(f'logger/{log_type.lower()}')}: {date_time.strftime('%H:%M')}]{text_format.white} {content}")
 
     def info(self, content: str) -> None:
         self.log(inspect.stack()[0][3], content)

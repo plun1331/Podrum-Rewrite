@@ -28,8 +28,11 @@
 # IN THE SOFTWARE.                                                             #
 #                                                                              #
 ################################################################################
+import json
+import os
 
 from constant.misc import misc
+from constant.translations import translations
 from constant.vanilla_commands import vanilla_commands
 from handler.command_handler import command_handler
 from manager.command_manager import command_manager
@@ -46,15 +49,18 @@ class server:
         self.logger = logger()
         self.plugin_manager = plugin_manager(self)
         self.event_manager = event_manager()
+        with open(os.getcwd() + "/podrum/server.json", 'r') as f:
+            self.config = json.load(f)
+        translations.set_language(self.config['language'])
         self.start()
 
     def register_vanilla_commands(self) -> None:
-        self.command_manager.register(vanilla_commands.say, "Say Command")
-        self.command_manager.register(vanilla_commands.stop, "Stop Command")
-        self.command_manager.register(vanilla_commands.help, "Help Command")
-        self.command_manager.register(vanilla_commands.version, "Version Command")
-        self.command_manager.register(vanilla_commands.reload, "Reload Command")
-        self.command_manager.register(vanilla_commands.plugins, "Plugins Command")
+        self.command_manager.register(vanilla_commands.say, translations.get_translation('commands/descriptions/say'))
+        self.command_manager.register(vanilla_commands.stop, translations.get_translation('commands/descriptions/stop'))
+        self.command_manager.register(vanilla_commands.help, translations.get_translation('commands/descriptions/help'))
+        self.command_manager.register(vanilla_commands.version, translations.get_translation('commands/descriptions/version'))
+        self.command_manager.register(vanilla_commands.reload, translations.get_translation('commands/descriptions/reload'))
+        self.command_manager.register(vanilla_commands.plugins, translations.get_translation('commands/descriptions/plugins'))
 
     def get_plugin_main(self, name):
         if name in self.plugin_manager.plugins:
@@ -66,9 +72,15 @@ class server:
         self.plugin_manager.load_all(misc.plugin_dir)
         self.register_vanilla_commands()
         self.command_handler.start_handler()
+<<<<<<< HEAD
+        finnish_time = time.time()
+        startup_time = "%.3f" % (finnish_time - start_time)
+        self.logger.success(translations.get_translation('serverStarted').format(startup_time))
+=======
         finish_time = time.time()
         startup_time = "%.3f" % (finish_time - start_time)
         self.logger.success(f"Done in {startup_time}. Type help to view all available commands.")
+>>>>>>> 9191d4e2ba335caac4b4099c244622191c7da3be
 
     def stop(self) -> None:
         self.command_handler.stop_handler()

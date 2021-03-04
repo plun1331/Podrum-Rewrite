@@ -1,0 +1,53 @@
+{
+  "serverStarted": "Done in {0}s. Type help to view all available commands.",
+  "invalidIPVersion": "Unknown address version {0}",
+  "bindError": "Failed to bind to {0}",
+  "wizard": {
+    "langSelected": "{0} has been set as the default language.",
+    "licensePrompt": "Podrum is licenced under the {0} license. Do you accept this license? (y/n): ",
+    "invalidInput": "Invalid input.",
+    "acceptLicense": "You must accept the license to use this software."
+  },
+  "logger": {
+    "info": "INFO",
+    "warn": "WARNING",
+    "error": "ERROR",
+    "success": "SUCCESS",
+    "emergency": "EMERGENCY",
+    "alert": "ALERT",
+    "notice": "NOTICE",
+    "critical": "CRITICAL",
+    "debug": "DEBUG"
+  },
+  "commands": {
+    "descriptions": {
+      "say": "Say Command",
+      "stop": "Stop Command",
+      "help": "Help Command",
+      "version": "Version Command",
+      "reload": "Reload Command",
+      "plugins": "Plugins Command"
+    },
+    "content": {
+      "stop": {
+        "0": "Stopping server...",
+        "1": "Server stopped."
+      },
+      "help": "Showing help",
+      "version": "This server is running Podrum version {0.podrum_version} {0.podrum_codename} on API {0.podrum_api_version} for mcbe {0.mcbe_version} ({0.mcbe_protocol}). This version is licensed under the {0.podrum_license} license.",
+      "reload": {
+          "0": "Reloading...",
+          "1": "Successfully reloaded."
+      },
+      "plugins": "Plugins"
+    },
+    "invalidCMD": "Invalid command!"
+  },
+  "plugins": {
+    "loading": "Loading {0['name']}...",
+    "loaded": "Successfully loaded {0['name']}.",
+    "duplicate": "A plugin with the name {0['name']} already exists.",
+    "incompatible": "A plugin with the name {0['name']} could not be loaded due to incompatible api version ({0['api_version']}).",
+    "unloaded": "Unloaded {0}."
+  }
+}

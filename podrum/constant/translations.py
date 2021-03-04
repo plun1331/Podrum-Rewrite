@@ -29,35 +29,39 @@
 #                                                                              #
 ################################################################################
 
-from threading import Thread
+import json
+from constant.misc import misc
 
-from constant.translations import translations
 
+class translations:
+    languages: dict = {}
+    language: str = 'en'
+    translations: dict = {}
 
-class command_handler(Thread):
-    def __init__(self, server) -> None:
-        super().__init__()
-        self.server = server
-        self.stopped = False
+    @classmethod
+    def get_translation(cls, key: str) -> str:
+        key = key.split('/')
+        if cls.translations == {}:
+            with open(f'{misc.translation_dir}/{cls.language}.json', 'r') as f:
+                cls.translations = json.load(f)
+        cd = cls.translations
+        for subkey in key:
+            cd = cd[str(subkey)]
+        return cd
 
-    def handle_command(self, user_input: str) -> None:
-        if len(user_input) > 0:
-            raw_command = user_input.split()
-            command_name = raw_command[0]
-            command_args = raw_command[1:]
-            commands = self.server.command_manager.commands
-            if command_name in commands:
-                self.server.command_manager.execute(command_name, command_args, self.server)
-            else:
-                self.server.logger.error(translations.get_translation('commands/invalidCMD'))
+    @classmethod
+    def set_language(cls, language: str) -> None:
+        language = language.lower()
+        cls.language = language
+        languages = cls.get_languages()
+        if language not in languages.keys():
+            raise ValueError("Invalid language.")
+        with open(f'{misc.translation_dir}/{language}.json', 'r') as f:
+            cls.translations = json.load(f)
 
-    def start_handler(self) -> None:
-        self.stopped = False
-        self.start()
-
-    def stop_handler(self) -> None:
-        self.stopped = True
-
-    def run(self) -> None:
-        while not self.stopped:
-            self.handle_command(input())
+    @classmethod
+    def get_languages(cls) -> dict:
+        if cls.languages == {}:
+            with open(f'{misc.translation_dir}/languages.json') as f:
+                cls.languages = json.load(f)
+        return cls.languages
