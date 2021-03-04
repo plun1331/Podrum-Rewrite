@@ -75,9 +75,6 @@ class server:
         finnish_time = time.time()
         startup_time = "%.3f" % (finnish_time - start_time)
         self.logger.success(translations.get_translation('serverStarted').format(startup_time))
-        finish_time = time.time()
-        startup_time = "%.3f" % (finish_time - start_time)
-        self.logger.success(f"Done in {startup_time}. Type help to view all available commands.")
 
     def stop(self) -> None:
         self.command_handler.stop_handler()

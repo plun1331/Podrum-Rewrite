@@ -28,8 +28,12 @@
 # IN THE SOFTWARE.                                                             #
 #                                                                              #
 ################################################################################
+import os
 
 from server import server
+from utils.setup_wizard import setup_wizard
 
 if __name__ == "__main__":
+    if not os.path.exists(f'{os.getcwd()}/podrum/server.json'):
+        setup_wizard()
     server()
