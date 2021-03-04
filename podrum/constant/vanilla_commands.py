@@ -30,7 +30,7 @@
 ################################################################################
 
 from constant.version import version
-from constant.translations import translations
+from manager.translation_manager import translation_manager
 import os
 
 class vanilla_commands:
@@ -43,27 +43,27 @@ class vanilla_commands:
 
     @staticmethod
     def stop(args: list, sender, server) -> None:
-        sender.send_message(translations.get_translation('commands/content/stop/0'))
+        sender.send_message(translation_manager.get_translation('commands/content/stop/0'))
         server.stop()
-        sender.send_message(translations.get_translation('commands/content/stop/1'))
+        sender.send_message(translation_manager.get_translation('commands/content/stop/1'))
         os.kill(os.getpid(), 15)
         
     @staticmethod
     def help(args: list, sender, server) -> None:
-        sender.send_message(f"--- {translations.get_translation('commands/content/help')} ---")
+        sender.send_message(f"--- {translation_manager.get_translation('commands/content/help')} ---")
         for name, info in dict(server.command_manager.commands).items():
             sender.send_message(f"/{name}: {info['description']}")
           
     @staticmethod
     def version(args: list, sender, server) -> None:
-        sender.send_message(translations.get_translation('commands/content/version').format(version))
+        sender.send_message(translation_manager.get_translation('commands/content/version').format(version))
 
     @staticmethod
     def reload(args: list, sender, server) -> None:
-        sender.send_message(translations.get_translation('commands/content/reload/0'))
+        sender.send_message(translation_manager.get_translation('commands/content/reload/0'))
         server.plugin_manager.reload_all()
-        sender.send_message(translations.get_translation('commands/content/reload/1'))
+        sender.send_message(translation_manager.get_translation('commands/content/reload/1'))
                                 
     @staticmethod
     def plugins(args: list, sender, server) -> None:
-        sender.send_message(f"{translations.get_translation('commands/content/plugins')}({len(server.plugin_manager.plugins)}): {', '.join(server.plugin_manager.plugins)}")
+        sender.send_message(f"{translation_manager.get_translation('commands/content/plugins')}({len(server.plugin_manager.plugins)}): {', '.join(server.plugin_manager.plugins)}")

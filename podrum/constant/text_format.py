@@ -30,6 +30,9 @@
 ################################################################################
 
 class text_format:
+    r"""
+    Text format codes used by the server's Logger.
+    """
     bold: str = "\x1b[1m"
     obfuscated: str = ""
     italic: str = "\x1b[3m"

@@ -33,7 +33,10 @@ import json
 from constant.misc import misc
 
 
-class translations:
+class translation_manager:
+    r"""
+
+    """
     languages: dict = {}
     language: str = 'en'
     translations: dict = {}

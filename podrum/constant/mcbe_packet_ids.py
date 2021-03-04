@@ -30,6 +30,9 @@
 ################################################################################
 
 class mcbe_packet_hexes:
+    r"""
+    A list of Minecraft: Bedrock Edition packet IDs.
+    """
     login_packet = 0x01
     play_status_packet = 0x02
     server_to_client_handshake_packet = 0x03
