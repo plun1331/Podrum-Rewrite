@@ -44,6 +44,12 @@ class protocol_buffer:
 
     def write(self, data: bytes) -> None:
         self.data += data
+
+    def read_remaining(self) -> bytes:
+        return self.read(len(self.data[self.pos:]))
+
+    def pos_exceeded(self):
+        return bool(len(self.data) <= self.pos)
         
     def read_char(self) -> int:
         return struct.unpack("b", self.read(1))[0]
@@ -239,7 +245,7 @@ class protocol_buffer:
         self.write_ushort(len(value), "big")
         self.write(value.encode())
 
-    def read_raknet_address_ipv4(self) -> raknet_address:
+    def read_raknet_address(self) -> raknet_address:
         version = self.read_uchar()
         if version == 4:
             host = ".".join([
