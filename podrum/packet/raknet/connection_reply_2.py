@@ -35,7 +35,7 @@ from utils.protocol_buffer import protocol_buffer
 class connection_reply_2(protocol_buffer):
     def read(self) -> None:
         self.packet_id: int = self.read_uchar()
-        self.magic: bytes = self.read(16)
+        self.magic: bytes = super().read(16)
         self.server_guid: int = self.read_ulong("big")
         self.client_address: raknet_address = self.read_raknet_address()
         self.mtu_size: int = self.read_ushort("big")
@@ -43,7 +43,7 @@ class connection_reply_2(protocol_buffer):
         
     def write(self) -> None:
         self.write_uchar(self.packet_id)
-        self.write(self.magic)
+        super().write(self.magic)
         self.write_ulong(self.server_guid, "big")
         self.write_raknet_address(self.client_address)
         self.write_ushort(self.mtu_size, "big")

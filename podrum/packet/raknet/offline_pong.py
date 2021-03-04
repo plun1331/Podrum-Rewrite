@@ -37,12 +37,12 @@ class offline_pong(protocol_buffer):
         self.packet_id: int = self.read_uchar()
         self.client_timestamp: int = self.read_ulong("big")
         self.server_guid: int = self.read_ulong("big")
-        self.magic: bytes = self.read(16)
+        self.magic: bytes = super().read(16)
         self.server_name = self.read_raknet_string()
         
     def write(self) -> None:
         self.write_uchar(self.packet_id)
         self.write_ulong(self.client_timestamp, "big")
         self.write_ulong(self.server_guid, "big")
-        self.write(self.magic)
+        super().write(self.magic)
         self.write_raknet_string(self.server_name)

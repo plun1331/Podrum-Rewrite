@@ -35,11 +35,11 @@ class incompatible_protocol_version(protocol_buffer):
     def read(self) -> None:
         self.packet_id: int = self.read_uchar()
         self.protocol_version: int = self.read_uchar()
-        self.magic: bytes = self.read(16)
+        self.magic: bytes = super().read(16)
         self.server_guid: int = self.read_ulong("big")
         
     def write(self) -> None:
         self.write_uchar(self.packet_id)
         self.write_uchar(self.protocol_version)
-        self.write(self.magic)
+        super().write(self.magic)
         self.write_ulong(self.server_guid, "big")

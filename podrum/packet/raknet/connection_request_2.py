@@ -35,14 +35,14 @@ from utils.protocol_buffer import protocol_buffer
 class connection_request_2(protocol_buffer):
     def read(self) -> None:
         self.packet_id: int = self.read_uchar()
-        self.magic: bytes = self.read(16)
+        self.magic: bytes = super().read(16)
         self.server_address: raknet_address = self.read_raknet_address()
         self.mtu_size: int = self.read_ushort("big")
         self.client_guid: int = self.read_ulong("big")
         
     def write(self) -> None:
         self.write_uchar(self.packet_id)
-        self.write(self.magic)
+        super().write(self.magic)
         self.write_raknet_address(self.server_address)
         self.write_ushort(self.mtu_size, "big")
         self.write_ulong(self.client_guid, "big")
